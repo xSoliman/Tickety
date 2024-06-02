@@ -1,5 +1,5 @@
-**Tickety - Football Match Ticket Booking System**
-
+# Tickety 
+### Football Match Ticket Booking System
 Tickety is a web application developed using ASP.NET MVC (.NET 7) that allows users to book tickets for football matches. It provides two types of users: normal users and administrators. Normal users can register, explore matches, purchase tickets, manage their tickets and profile, and update their information. Administrators have additional privileges such as managing tickets, stadiums, matches, and users.
 
 ### Features
