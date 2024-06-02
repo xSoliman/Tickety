@@ -1,0 +1,97 @@
+﻿@model Tickty.Models.Stadium
+
+<title>Create New Stadium</title>
+
+<style>
+
+    .custom-file{
+        margin-top:10px;
+        
+    }
+    .form-group{
+        margin-bottom:15px;
+    }
+    h1{
+        margin-bottom: 20px;
+    }
+    label{
+        color:dimgray;
+    }
+</style>
+<h1 class="text-center">Create Stadiums</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Stadium Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Stadium Description</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label">Location Description</label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GmapLocation" class="control-label">Location Link</label>
+                    <input asp-for="GmapLocation" class="form-control" />
+                    <span asp-validation-for="GmapLocation" class="text-danger"></span>
+                </div>
+
+              
+                <div class="form-group">
+                    <div class="custom-file">
+                        <label class="custom-file-label" id="photoLabel" for="clientFile">Stadium Image</label>
+                        <br>
+                        <input type="file" class="custom-file-input" asp-for="clientFile" id="clientFile"  onchange="previewImage()">
+                    </div>
+                    <span class="text-danger">@Html.ValidationMessageFor(model => model.clientFile)</span>
+                </div>
+
+                <div class="form-group">
+                    <img src="#" alt="Preview" id="imagePreview" style="display: none; max-width: 100%; height: auto;" />
+                </div>
+
+                <div class="form-group text-center">
+                    <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-square"></i></a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function previewImage() {
+        var fileInput = document.getElementById('clientFile');
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var imgPreview = document.getElementById('imagePreview');
+            imgPreview.src = e.target.result;
+            imgPreview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

@@ -1,0 +1,106 @@
+﻿@model Tickty.Models.Ticket
+
+<title>Edit ticket</title>
+
+<style>
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: dimgray;
+    }
+
+
+    .custom-select {
+        position: relative;
+        width: 100%;
+        max-width: 550px;
+    }
+
+        .custom-select select {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #fff;
+        }
+
+        .custom-select .arrow {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #666;
+        }
+
+</style>
+<h1 class="text-center">Edit</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label">Ticket Type</label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Type Description</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label">Ticket Price</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TicketCount" class="control-label">Tickets Available</label>
+                    <input asp-for="TicketCount" class="form-control" />
+                    <span asp-validation-for="TicketCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MatchId" class="control-label">Choose Match</label>
+                    <div class="custom-select">
+                        <select asp-for="MatchId" class="form-control" asp-items="ViewBag.Matches"></select>
+                        <span asp-validation-for="MatchId" class="text-danger"></span>
+                        <span class="arrow"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group text-center">
+                    <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-square"></i></a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

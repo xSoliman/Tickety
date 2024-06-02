@@ -1,0 +1,146 @@
+﻿
+
+@model TicketDetails
+
+<title>Bill details</title>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Details</title>
+    <style>
+
+
+        #ticket-details-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        h5 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .ticket-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .ticket-info {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .ticket-info span {
+            font-weight: bold;
+        }
+
+        .qr-code {
+            max-width: 150px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .back{
+            display:block;
+            position:relative;
+            top:15px;
+        }
+
+        .location img {
+            width: 20px;
+            height: 20px;
+        }
+ 
+    </style>
+</head>
+<body>
+ 
+
+    <div id="ticket-details-container">
+            <h2>Bill Details</h2>
+            <div class="ticket-info">
+                <img src="@Model.QrCode" alt="QR Code" class="qr-code" />
+            </div>
+            <div class="ticket-info">
+                <span>Bill ID:</span> @Model.BillId
+            </div>
+       
+            <div class="ticket-info">
+                <span>Bill Date:</span> @Model.BillDate
+            </div>
+
+        <!-- User Section -->
+        <div class="ticket-section">
+            <h5>User</h5>
+            <div class="ticket-info">
+                <span>User ID:</span> @Model.UserId
+            </div>
+            <div class="ticket-info">
+                <span>User Email:</span> @Model.UserEmail
+            </div>
+     
+        </div>
+
+        <!-- Ticket Section -->
+        <div class="ticket-section">
+            <h5>Ticket</h5>
+            <div class="ticket-info">
+                <span>Ticket ID:</span> @Model.TicketId
+            </div>
+            <div class="ticket-info">
+                <span>Ticket Type:</span> @Model.TicketType
+            </div>
+            <div class="ticket-info">
+                @Model.TicketDescription
+            </div>
+        </div>
+
+        <!-- Match Section -->
+        <div class="ticket-section">
+            <h5>Match</h5>
+            <div class="ticket-info">
+                @Model.Team1 vs @Model.Team2
+            </div>
+
+            <div class="ticket-info">
+                <span>Match ID:</span> @Model.MatchId
+            </div>
+         
+          
+            <div class="ticket-info">
+                <span>Referee:</span> @Model.Referee
+            </div>
+            <div class="ticket-info">
+                <span>Match Date:</span> @Model.MatchDate.ToShortDateString()
+            </div>
+            <div class="ticket-info">
+                <span>Start Time:</span> @DateTime.Today.Add(Model.StartTime).ToString("h:mm tt")
+            </div>
+            <div class="ticket-info">
+                <span>Stadium</span> @Model.StadiumName
+            </div>
+            <div class="ticket-info location">
+                <span>Location:</span> @Model.StadiumLocation  <a href="@Model.GmapLocation" target=_blank><img src="~/img/map.png" alt="Location"></a>
+            </div>
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary back"><i class="bi bi-arrow-left-square"></i></a>
+    </div>
+</body>
+</html>
+

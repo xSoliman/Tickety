@@ -1,0 +1,111 @@
+﻿@model List<Tickty.Models.Ticket>
+
+@{
+    ViewBag.Title = "My Tickets";
+}
+<title>My tickets</title>
+
+<style>
+    .ticket-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticket-table {
+        margin-top: 20px;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .ticket-table th, .ticket-table td {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .ticket-table td {
+            color: dimgray;
+            font-weight: 500;
+        }
+
+
+    .ticket-table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .alert-info {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .ticket-title {
+        font-size: 2em;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .table-header-dark {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .details-button {
+        color: #343a40;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .details-button:hover {
+            border-color: #004085;
+        }
+</style>
+
+<div class="container1 mt-5">
+    <div class="ticket-container">
+        <h2 class="ticket-title">My Tickets</h2>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-danger" style="text-align:center" role="alert">
+                You have no tickets.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered ticket-table ticket-table-hover">
+                    <thead class="table-header-dark">
+                        <tr>
+                            <th>Match</th>
+                            <th>Stadium</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ticket in Model)
+                        {
+                            <tr>
+                                <td>@ticket.Match.Team1 vs @ticket.Match.Team2</td>
+                                <td>@ticket.Match.Stadium.Name</td>
+                                <td>@ticket.Match.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@DateTime.Today.Add(ticket.Match.StartTime).ToString("h:mm tt")</td>
+                                <td>@ticket.Type</td>
+                                <td>
+                                    <a asp-controller="UserProfile" asp-action="TicketDetails" asp-route-billId="@ViewBag.BillId" class="details-button">View Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@* @model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Admin</title>
+    <style>
+        #register-form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-left: 30px;
+        }
+
+        .type {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .card-body input {
+            margin-bottom: 20px;
+            margin-left: 50px;
+        }
+
+        label {
+            position: relative;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Add Admin</h5>
+                        
+                        <form asp-controller="Admin" asp-action="AddAdmin" method="post">
+                            <div class="col-md-9">
+                                <div class="form-floating" id="Name">
+                                    <label for="Name">Name</label>
+                                    <input type="text" class="form-control" id="Name" placeholder="Name" name="Name" required />
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-floating" id="Email">
+                                    <label for="Email">Email</label>
+                                    <input type="Email" class="form-control" id="Email" placeholder="Email" name="Email" required />
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-floating" id="Password">
+                                    <label for="Password">Password</label>
+                                    <input type="password" class="form-control" id="Password" placeholder="Password" name="Password" required />
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+ *@

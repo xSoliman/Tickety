@@ -1,0 +1,157 @@
+﻿@model Tickty.Models.Ticket
+@{
+    int? userId = Context.Session.GetInt32("Id");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Checkout</title>
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+       
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+        }
+
+            .card h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .card h4 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .card p {
+                margin-bottom: 5px;
+                font-weight: 400;
+                color: dimgray;
+                font-size: 18px;
+            }
+
+        .checkmark {
+            display: none;
+        }
+
+            .checkmark + .checkmark-label::after {
+                content: '❌';
+                color: red;
+            }
+
+            .checkmark:checked + .checkmark-label::after {
+                content: '\2714';
+                color: green;
+                font-size:20px;
+            }
+
+        .text-danger {
+            color: red;
+            display: none;
+            margin-top: -25px;
+        }
+
+        #paymentLink {
+            position:relative;
+            bottom:25px;
+            left:250px;
+            text-decoration: none;
+           
+            color: #007bff;
+        }
+
+
+        #Form {
+            text-align: center;
+        }
+
+
+        #Form input[type="submit"] {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #86B817;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            #Form input[type="submit"]:hover {
+                background-color: #6b901d; /* Darken the background color on hover */
+            }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Summary</h1>
+        <h4>Match details:</h4>
+        <p>Match: @ViewBag.MatchDetails.Team1 vs @ViewBag.MatchDetails.Team2</p>
+        <p>Referee: @ViewBag.MatchDetails.Referee</p>
+        <p>Date: @ViewBag.MatchDetails.Date.ToShortDateString()</p>
+        <p>Start Time: @ViewBag.MatchDetails.StartTimeFormatted</p>
+        <p>Stadium: @ViewBag.MatchDetails.StadiumName</p>
+        <p>Location: @ViewBag.MatchDetails.StadiumLocation</p>
+        <hr>
+        <h4>Ticket details:</h4>
+        <p>Ticket Type: @Model.Type</p>
+        <p>Ticket Price: @Model.Price.ToString("C")</p>
+        <hr>
+
+        <h4>Payment</h4>
+        <!-- Checkbox for payment -->
+        <input type="checkbox" id="paymentCheckbox" class="checkmark">
+        <label for="paymentCheckbox" class="checkmark-label">
+            Payment information received 
+        </label>
+        <a href="#" id="paymentLink" onclick="return togglePayment()">Go to the payment process</a>
+        <!-- Validation message -->
+        <p class="text-danger" id="paymentValidation">
+            Please enter payment information  
+        </p>
+
+        <form id="Form" method="post" asp-controller="Matches" asp-action="Bill">
+            <input type="hidden" name="ticketId" value="@Model.Id">
+            <input type="hidden" name="userId" value="@userId">
+            <input type="submit" value="Buy ticket!" onclick="return validatePayment()">
+        </form>
+    </div>
+
+    <script>
+        // Function to toggle checkmark and validation message
+        function togglePayment() {
+            var checkbox = document.getElementById("paymentCheckbox");
+            var validationMessage = document.getElementById("paymentValidation");
+            checkbox.checked = true; // Set checkbox to checked state
+            checkbox.disabled = true; // Disable checkbox
+
+            // Show/hide validation message based on checkbox state
+            validationMessage.style.display = "none";
+
+            // Prevent default link behavior
+            return false;
+        }
+
+        // Function to validate payment before submission
+        function validatePayment() {
+            var checkbox = document.getElementById("paymentCheckbox");
+            var validationMessage = document.getElementById("paymentValidation");
+            if (!checkbox.checked) {
+                validationMessage.style.display = "block"; // Show validation message
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>

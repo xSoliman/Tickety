@@ -1,0 +1,111 @@
+﻿@model Tickty.Models.Bill
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Successful Purchase</title>
+    <style>
+
+
+        /* Card styles */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .card h1 {
+                margin-top: 10px;
+                font-size: 28px;
+                color: green; /* Green */
+            }
+
+            .card h6 {
+                font-size: 18px;
+                margin-top: 10px;
+                font-weight:700;
+                margin-bottom: -4px;
+                text-align: center;
+                color: #34495E; /* Grayish blue */
+            }
+
+            .card p {
+                margin-bottom: 10px;
+                font-size: 16px;
+                color: #34495E; /* Grayish blue */
+            }
+
+        /* QR code section */
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        /* Match information */
+        .match-info {
+            text-align: center;
+            margin-left:-20px;
+        }
+
+            .match-info span {
+                font-weight: bold;
+            }
+
+        #stad{
+            margin-top:-15px;
+
+        }
+
+        #Link {
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            #Link:hover {
+                text-decoration: underline;
+            }
+
+        #adv {
+            position:relative;
+            top:10px;
+            right:10px;
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Successful Purchase</h1>
+        <h6>We appreciate your purchase, Enjoy the match!</h6>
+        <p>You can find your tickets in <a id="Link" asp-controller="Tickets" asp-action="UserTickets">My tickets</a></p>
+
+        <p id="adv">Keep your ticket QR secret</p>
+
+        <div class="qr-container">
+            <img src="@Model.QrCode" alt="QR Code" class="qr-code" />
+        </div>
+
+        <div class="match-info">
+            <p><span>@Model.Ticket.Match.Team1</span> vs <span>@Model.Ticket.Match.Team2</span></p>
+            <p id="stad">@Model.Ticket.Match.Stadium.Name Stadium</p>
+        </div>
+    </div>
+</body>
+</html>

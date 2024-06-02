@@ -1,0 +1,160 @@
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>My Account</title>
+    <style>
+
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: #fff; /* White content background */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        h2 {
+            color: #1e1f29; /* Dark gray heading */
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            display: block;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+            margin-top: 40px;
+        }
+
+        .account-button, .edit-profile-button {
+            background-color: none;
+            color: #1e1f29;
+            border: none;
+            font-weight:bold;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            /* margin-left: 10px; */
+            /* padding: 10px 25px; /* Adjust padding for better button spacing */ */
+        }
+
+            .account-button:hover, .edit-profile-button:hover {
+                transform: scale(1.05);
+            }
+
+        .profile-section {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 10px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .profile-value {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .profile-image {
+            text-align: center;
+            margin-bottom: 10px; /* Add margin to separate the image from other content */
+        }
+
+            .profile-image img {
+                border-radius: 50%; /* Apply border-radius for a circular image */
+                width: 150px; /* Adjust the width as needed */
+                height: 150px; /* Adjust the height as needed */
+                object-fit: cover; /* Maintain aspect ratio and cover the container */
+                border: 2px solid #1e1f29; /* Add a border with the desired color */
+            }
+
+        .profile-info {
+            margin-top: 10px;
+        }
+
+        .info-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px; /* Add margin between info boxes */
+        }
+
+        .info-label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1e1f29;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            margin-left:10px;
+            color: #333;
+        }
+
+        .section-title {
+            margin-top:10px;
+            color: #86B817;
+            margin-left:35%;
+            font-size: 24px; /* Adjust font size as needed */
+            font-weight: bold; /* Apply bold font weight */
+        }
+
+
+        .edit-profile-button{
+            position:relative;
+            left:595px;
+            top:20px;
+
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h2 class="section-title">Welcome @Model.Name!</h2>
+
+        <div class="profile-section">
+            <div class="profile-info">
+                <div class="info-box">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">@Model.Name</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">@Model.Email</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value">@Model.Phone</div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                @* <a asp-action="UserTickets" class="account-button"><i class="bi bi-ticket-fill"></i> My Tickets</a> *@
+                <a asp-action="UpdateProfile" class="edit-profile-button"><i class="bi bi-pencil"></i> Edit My Profile</a>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>

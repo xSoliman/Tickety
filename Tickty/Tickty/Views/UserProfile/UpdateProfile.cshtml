@@ -1,0 +1,194 @@
+﻿@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Profile</title>
+
+    <style>
+
+        .container-update-profile {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #1e1f29;
+            margin-top: -50px;
+        }
+
+        .alert {
+            text-align:center;
+            margin-right:50px;
+            margin-left:50px;
+        }
+
+        .update-profile-card {
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced box shadow */
+            transition: 0.3s;
+            background-color: #fff;
+            color: #1e1f29;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 20px;
+            padding-top: 50px;
+        }
+
+        .profile-image {
+            margin-top: 5px;
+            padding-bottom: -10px;
+            margin-bottom: -10px;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+            .profile-image img {
+                border-radius: 50%;
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                border: 2px solid #1e1f29;
+            }
+
+        .form-group label {
+            color: dimgray;
+        }
+
+        .form-control {
+            background-color: #fff;
+            color: #1e1f29;
+            border-color: #1e1f29;
+            border-radius: 5px;
+            margin-bottom: 10px; /* Added margin between form controls */
+        }
+
+            .form-control:focus {
+                background-color: #fff;
+                color: #1e1f29;
+                border-color: #1e1f29;
+            }
+
+
+
+        .change-password-btn {
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 2px;
+            position: absolute;
+            top: 10px;
+            font-weight:bold;
+            right: 10px;
+        }
+
+            .change-password-btn:hover {
+                color: #0060;
+            }
+
+
+
+        .my-profile-link {
+            color: #86B817;
+            font-weight: 500;
+            position:relative;
+            top:5px;
+            color:black;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .my-profile-link:hover {
+               color: #86B817;
+                
+
+            }
+
+        #pass {
+            color: #D4B140; /* Darker color */
+            transition: transform 0.3s, font-size 0.3s; /* Smooth transition for scaling and size change */
+        }
+
+            #pass:hover {
+                transform: scale(1.1); /* Slightly increase the size */
+                font-size: 1.02em; /* Increase the font size */
+            }
+
+        .text-danger {
+            position:relative;
+            bottom:10px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container-update-profile">
+
+        <h2 class="text-center mb-4">Update Profile</h2>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <div class="row">
+
+            <!-- Combined Information and Photo Card -->
+            <div class="col-md-12">
+                <div class="card update-profile-card">
+                    <div class="card-body">
+                        <div class="change-password-btn">
+                            <a asp-controller="UserProfile" asp-action="ChangePassword" id="pass">Change Password <i class="bi bi-key-fill"></i></a>
+                        </div>
+                        <form asp-action="UpdateProfile"  method="post">
+
+                            <div style="margin-top:20px;" class="form-group">
+                                <label asp-for="Name">Full Name</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Phone">Phone Number</label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+
+                       
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <br>
+                                <a asp-controller="UserProfile" asp-action="Index" class="my-profile-link">Back to my profile</a>
+
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+</body>
+</html>

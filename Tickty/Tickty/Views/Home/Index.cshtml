@@ -1,0 +1,263 @@
+@model List<MatchDetails>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tickity - Home page</title>
+
+    <style>
+
+
+
+
+
+        #std {
+            color: #808B8D;
+        }
+
+            #std:hover {
+                color: #86B817;
+            }
+
+
+
+        /*             .team-names .team-left,
+                    .team-names .team-right{
+                        background-color: rgba(255, 255, 255, 0.5);
+                        color:black;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+
+                    }
+         */
+
+
+        .team-names {
+            position: absolute;
+            top: 220px; /* Adjust the vertical position as needed */
+            left: 110px; /* Position team1 on the left */
+            display: flex;
+            align-items: center;
+            background-color: rgba(50, 50, 50, 0.85); /* Dark gray background color */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+            .team-names .vs {
+                margin: 0 10px;
+            }
+
+            .team-names .team-left,
+            .team-names .team-right {
+                color: white; /* Text color for team names */
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .team-names .team-right {
+                margin-left: auto;
+            }
+
+        .vs {
+            color: #86B817;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+            margin-right: 35px;
+            padding: 35px 0;
+            color: white !important;
+            font-weight: bold;
+            font-size: 18px;
+            font-weight: bold;
+            outline: none;
+            transition: .5s;
+        }
+
+
+        .navbar-light .navbar-brand img {
+            max-height: 60px;
+            transition: .5s;
+        }
+
+        .sticky-top.navbar-light .navbar-nav .nav-link {
+            padding: 20px 0;
+            color: var(--dark) !important;
+        }
+
+
+        .navbar-light .navbar-nav .nav-link::before {
+            position: absolute;
+            content: "";
+            width: 0;
+            height: 2px;
+            bottom: -1px;
+            left: 50%;
+            background: var(--primary);
+            transition: .5s;
+        }
+
+        .navbar-light {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid rgba(256, 256, 256, .1);
+            z-index: 999;
+        }
+
+        .sticky-top.navbar-light {
+            position: fixed;
+            background: #FFFFFF;
+        }
+
+        .space {
+            width: 0;
+            margin-top: 0px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div calss="space"></div>
+    <!-- Hero Start -->
+    <div class="container-fluid position-relative p-0">
+
+        <div class="container-fluid bg-primary py-5 mb-1 hero-header">
+            <div class="container py-5">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-9 pt-lg-9 mt-lg-9 text-center">
+                        <h1 class="display-9 text-white mb-3 animated slideInDown">Experience Live Matches</h1>
+                        <p class="fs-4 text-white mb-4 animated slideInDown">Cheer for your team and make unforgettable memories!</p>
+
+                        <div class="position-relative w-75 mx-auto animated slideInDown">
+                            <form asp-controller="Buy" asp-action="Search">
+                                <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" name="searchString" placeholder="Eg: Al-Ahly" required>
+                                <button type="submit" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Hero End -->
+    <!-- Booking Process Section -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Booking Process</h6>
+                <h1 class="mb-5">3 Easy Steps</h1>
+            </div>
+            <div class="row gy-5 gx-4 justify-content-center">
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fas fa-futbol fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Choose Match</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Browse and select the match you want to attend from our upcoming schedule.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-credit-card fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Make Payment</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Securely pay online for your tickets using your preferred payment method.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="bi bi-ticket-perforated-fill fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Get Your Ticket</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Receive your electronic tickets via your account or download them directly </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Booking Process Section End -->
+    <!-- Package Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Matches</h6>
+                <h1 class="mb-5">Upcoming Matches!</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                @{
+                    int idx = 0;
+                }
+                @foreach (var match in Model)
+                {
+                    idx++;
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="package-item position-relative">
+                            <div class="overflow-hidden">
+                                <img class="img-fluid" style="width: 100%; height: 270px;" src="~/img/@match.StadiumImage" alt="@match.StadiumName">
+                                <div class="team-names">
+                                    <span class="team-left">@match.Team1</span>
+                                    <span class="vs">vs</span>
+                                    <span class="team-right">@match.Team2</span>
+                                </div>
+                            </div>
+                            <div class="d-flex border-bottom">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i><a href="@match.GmapLocation" id="std" target="_blank">@match.StadiumName</a></small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>@match.Date.ToShortDateString()</small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h6 style="font-size:18px;" class="mb-2">From @match.LowestTicket EGP</h6>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a asp-controller="Buy" asp-action="DisplayMatch" asp-route-id="@match.matchId" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;font-size:17px;">More Details</a>
+                                    @if (match.TicketCount > 0 && match.Date > DateTime.Now)
+                                    {
+                                        <a asp-controller="Buy" asp-action="BookMatch" asp-route-matchId="@match.matchId" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;">Buy Now</a>
+                                    }
+                                    else
+                                    {
+                                        if (match.Date < DateTime.Now)
+                                        {
+                                            <a class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;background-color:dimgray">Out of date</a>
+                                        }
+                                        else if (match.TicketCount <= 0)
+                                        {
+                                            <a class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;background-color:dimgray">Sold out</a>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    if (idx == 3)
+                        break;
+                }
+
+            </div>
+        </div>
+    </div>
+    <!-- Package End -->
+
+
+
+
+</body>
+
+</html>

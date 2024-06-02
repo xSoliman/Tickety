@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Ticket</title>
+    <style>
+        .container1 {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #333;
+            margin: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        select {
+            font-size: 1.1em;
+            padding: 12px;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+            select:focus {
+                border-color: #86B817;
+                outline: none;
+            }
+
+        #ticketDescription {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1em;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .btn1 {
+            display: inline-block;
+            margin: 20px auto 0; /* Center the button horizontally */
+            padding: 10px 20px;
+            width: 200px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #86B817;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .btn1:hover {
+                color: #fff;
+                transform: scale(1.05);
+            }
+    </style>
+    <script>
+        function showDescription() {
+            var selectBox = document.getElementById("ticketSelect");
+            var selectedOption = selectBox.options[selectBox.selectedIndex].dataset;
+            var description = document.getElementById("ticketDescription");
+
+            if (selectedOption.description) {
+                description.innerHTML = "Description: " + selectedOption.description;
+                description.style.display = "block";
+            } else {
+                description.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container1">
+        <div class="card">
+            <h1>@ViewBag.Team1 vs @ViewBag.Team2</h1>
+       
+            <h2>Select Ticket</h2>
+
+            <span class="text-danger">@ViewData["Wrong"]</span>
+
+            <form asp-controller="Buy" asp-action="Checkout" asp-route-matchId="@ViewBag.MatchId" method="post">
+                <select id="ticketSelect" name="ticketId" onchange="showDescription()">
+                    <option value="">Select a ticket</option>
+                    @foreach (var ticket in Model)
+                    {
+                        var isSoldOut = ticket.TicketCount == 0;
+                        var soldOutText = isSoldOut ? " (sold out)" : "";
+                        <option value="@ticket.Id" data-description="@ticket.Description" data-price="@ticket.Price.ToString("C")" data-type="@ticket.Type" data-sold-out="@isSoldOut.ToString().ToLower()">
+                            @ticket.Type, @ticket.Price.ToString("C")@soldOutText
+                        </option>
+                    }
+                </select>
+
+                <div id="ticketDescription"></div>
+                <button type="submit" class="btn1">Checkout</button>
+            </form>
+
+
+            <script>
+                function showDescription() {
+                    var select = document.getElementById("ticketSelect");
+                    var selectedOption = select.options[select.selectedIndex];
+                    var description = selectedOption.getAttribute("data-description");
+                    var ticketDescriptionDiv = document.getElementById("ticketDescription");
+
+                    // Update the description div with the selected ticket's description
+                    ticketDescriptionDiv.textContent = description;
+                }
+            </script>
+
+
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var options = document.querySelectorAll('option[data-sold-out]');
+            options.forEach(function (option) {
+                var isSoldOut = option.getAttribute('data-sold-out') === 'true';
+                if (isSoldOut) {
+                    option.disabled = true;
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

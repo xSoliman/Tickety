@@ -1,0 +1,172 @@
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Order Details</title>
+
+    <style>
+        /* Add custom styles here */
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .order-details-heading {
+            color: #d10024;
+            text-align: center;
+            margin-top:30px;
+            margin-bottom: 50px;
+            font-weight:500;
+            font-size: 28px;
+        }
+
+        .order-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            margin-right: 40px;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .order-section {
+            width: 48%;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+            .order-section.no-box {
+                margin-top:35px;
+                margin-bottom: 80px;
+                margin-left:40px;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+        .order-section-heading {
+            color: #1e1f29;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .order-info p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #495057;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .order-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .order-items-table th,
+            .order-items-table td {
+                text-align: center;
+                padding: 12px;
+                border-bottom: 1px solid #ddd;
+                font-size: 18px;
+            }
+
+            .order-items-table th {
+                background-color: #1e1f29;
+                color: #fff;
+            }
+
+            .order-items-table tbody tr:hover {
+                background-color: #f5f5f5;
+            }
+
+        .back-button-container {
+            text-align: left;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #d10024;
+            border: 1px solid #d10024;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .back-button:hover {
+                color: #fff;
+                background-color: #1e1f29;
+            }
+    </style>
+</head>
+<body>
+
+    <h3 class="order-details-heading">Order ID: @Model.OrderId</h3>
+
+    <div class="order-details-container">
+        <!-- Order Information Section without Box -->
+        <div class="order-section no-box">
+            <h4 class="order-section-heading">Order Information</h4>
+            <div class="order-info">
+                <p><strong>Order Date:</strong> @Model.OrderDate.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                <p><strong>Order Address:</strong> @Model.Address.AddressLine, @Model.Address.City, @Model.Address.Governorate, @Model.Address.Country</p>
+                <p><strong>Shipping:</strong> 50 EGP</p>
+                <p><strong>Total Amount:</strong> @Model.TotalAmount EGP</p>
+            </div>
+        </div>
+
+        <!-- Order Items Section -->
+        <div class="order-section">
+            <h4 class="order-section-heading">Order Items</h4>
+            <div class="table-container">
+                <table class="order-items-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="ProductDetails" asp-action="Index" asp-route-id="@item.Product.ProductId" style="font-weight: 450;">
+                                        @item.Product.ProductName
+                                    </a>
+                                </td>
+                                <td>@item.Quantity</td>
+                                <td>@(item.Price * item.Quantity) EGP</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-button-container">
+        <!-- Back to Orders History Button -->
+        <a href="@Url.Action("OrdersHistory", "UserProfile")" class="back-button"><i class="bi bi-arrow-bar-left"></i> Orders History</a>
+    </div>
+
+</body>
+</html>
+ *@

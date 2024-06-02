@@ -1,0 +1,124 @@
+﻿@* @model List<Feedback>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admins List</title>
+    <style>
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+            .table th,
+            .table td {
+                border: none;
+                padding: 12px;
+                vertical-align: middle;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f0f0f0;
+            }
+
+   
+
+        .btn-info {
+            
+        }
+
+       
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .feedback-content {
+            max-width: 300px; 
+            max-height: 100px; 
+            overflow: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center">
+            <h1 style="margin-top:40px;">User's Feedback!</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th style="position:relative;left:20px;">Rating</th>
+                        <th>Feedback</th>
+                        <th>Time</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in Model)
+                    {
+                        var userName = f.User?.Name ?? "Unknown";
+                        <tr>
+                            <td>@userName</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="pl-3">
+
+                                        @{
+                                            // Generate star icons based on rating value
+                                            var stars = "";
+                                            for (int i = 0; i < f.Rate; i++)
+                                            {
+                                                stars += "<i class='fas fa-star text-warning'></i>";
+                                            }
+                                        }
+                                        <p><b>@Html.Raw(stars)</b></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="feedback-content">@f.FeedbackContent</td>
+                           
+                            <td>@f.Timestamp</td>
+                            <td style="position:relative;margin-left:20px;margin-right:-20px;">
+                                <form asp-controller="Admin" asp-action="RemoveFeedback" asp-route-id="@f.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                            @if (!f.Visible)
+                            {
+                                <td style="margin-right:-20px;">
+                                    <form asp-controller="Admin" asp-action="DisplayFeedback" asp-route-id="@f.Id">
+                                        <button type="submit" class="btn btn-outline-success btn-sm"><b>Display in the home page</b></button>
+                                    </form>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="margin-right:-20px;">
+                                    <form asp-controller="Admin" asp-action="HideFeedback" asp-route-id="@f.Id">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm"><b> Hide from the home page</b></button>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+
+</body>
+</html>
+ *@

@@ -1,0 +1,66 @@
+﻿@* @model List<User>
+<html>
+<head>
+    <title>Parents List</title>
+    <style>
+        .cont {
+            margin-top: 40px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+            .table th,
+            .table td {
+                border: none;
+                padding: 12px;
+                vertical-align: middle;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f0f0f0;
+            }
+    </style>
+
+</head>
+<body>
+
+    <div class="cont">
+        <div class="text-center">
+            <h1 style="margin-top:40px;">Parents</h1>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Government</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>@u.Name</td>
+                            <td>@u.Email</td>
+                            <td>@u.Age</td>
+                            <td>@u.Government</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> *@

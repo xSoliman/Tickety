@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stadium Selection</title>
+<style>
+
+    .container1 {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    .map-icon {
+        width: 20px;
+        height: auto;
+        vertical-align: middle;
+    }
+</style>
+</head>
+<body>
+
+<div class="container1">
+    <h1>Stadium Selection</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Stadium Name</th>
+                <th>City</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="showLocation('Cairo Stadium Sports Hall', 'Cairo', 'Location 1')">
+                <td>Cairo Stadium Sports Hall</td>
+                <td>Cairo</td>
+                <td><a target="_blank" href="https://goo.gl/maps/SBNUBn36GWnrVdZM7"><img class="1" src="img/1.png"width="20px" height="15px" alt="Map Icon"></a></td>
+            </tr>
+            <tr onclick="showLocation('New Captial Sports Hall', 'Cairo', 'Location 2')">
+                <td>New Captial Sports Hall</td>
+                <td>Cairo</td>
+<td><a target="_blank" href="https://goo.gl/maps/SBNUBn36GWnrVdZM7"><img class="map-icon" src="img/1.png"  alt="Map Icon"></a></td>            </tr>
+            <tr onclick="showLocation('Hassan Mostafa Sports Hall (6th of October City)', 'Cairo', 'Location 3')">
+                <td>Hassan Mostafa Sports Hall (6th of October City)</td>
+                <td>Cairo</td>
+                <td><a target="_blank" href="https://goo.gl/maps/SBNUBn36GWnrVdZM7"><img class="map-icon" src="img/1.png" alt="Map Icon"></a></td>
+            </tr>
+            <tr onclick="showLocation('Borg Al Arab Sports', 'Alexandria', 'Location 4')">
+                <td>Borg Al Arab Sports</td>
+                <td>Alexandria</td>
+                <td><a target="_blank" href="https://goo.gl/maps/SBNUBn36GWnrVdZM7"><img class="map-icon" src="img/1.png" alt="Map Icon"></a></td>
+            </tr>
+            <!-- Add more stadiums as needed -->
+        </tbody>
+    </table>
+    <div id="location-details"></div>
+</div>
+
+<script>
+    function showLocation(stadium, city, location) {
+        var details = "You selected: " + stadium + " in " + city + ", located at " + location + ". ";
+        document.getElementById("location-details").innerText = details;
+    }
+</script>
+
+</body>
+</html>

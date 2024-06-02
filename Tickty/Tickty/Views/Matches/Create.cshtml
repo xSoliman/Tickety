@@ -1,0 +1,120 @@
+﻿@model Tickty.Models.Match
+
+<title>Create New Match</title>
+
+<style>
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: dimgray;
+    }
+
+
+    .custom-select {
+        position: relative;
+        width: 100%;
+        max-width: 550px; 
+
+
+    }
+
+        .custom-select select {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #fff;
+        }
+
+        .custom-select .arrow {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #666;
+        }
+
+
+
+</style>
+<h1 class="text-center">Create</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+                <div class="form-group">
+                    <label asp-for="Team1" class="control-label"></label>
+                    <input asp-for="Team1" class="form-control" />
+                    <span asp-validation-for="Team1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Team2" class="control-label"></label>
+                    <input asp-for="Team2" class="form-control" />
+                    <span asp-validation-for="Team2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Referee" class="control-label"></label>
+                    <input asp-for="Referee" class="form-control" />
+                    <span asp-validation-for="Referee" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Match Desription</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" type="date" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartTime" class="control-label">Start Time</label>
+                    <input asp-for="StartTime" class="form-control" type="time" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="StadiumId" class="control-label">Choose stadium</label>
+                    <div class="custom-select">
+                        <select asp-for="StadiumId" class="form-control" asp-items="ViewBag.Stadiums"></select>
+                        <span asp-validation-for="StadiumId" class="text-danger"></span>
+                        <span class="arrow"></span>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="form-group text-center">
+                    <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left-square"></i></a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

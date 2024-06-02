@@ -1,0 +1,145 @@
+﻿@model List<MatchDetails>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Matches - Tickety</title>
+    <style>
+
+        .container1 {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .package-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+            .package-item:hover {
+                transform: translateY(-5px);
+            }
+
+        .team-names {
+            position: absolute;
+            top: 220px; /* Adjust the vertical position as needed */
+            left: 105px; /* Position team1 on the left */
+            display: flex;
+            align-items: center;
+            background-color: rgba(50, 50, 50, 0.85); /* Dark gray background color */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+            .team-names .vs {
+                margin: 0 10px;
+            }
+
+            .team-names .team-left,
+            .team-names .team-right {
+                color: white; /* Text color for team names */
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .team-names .team-right {
+                margin-left: auto; /* Position team2 on the right */
+            }
+
+        .vs {
+            color: #86B817;
+        }
+
+        .srch {
+            position:relative;
+            left:380px;
+            top:250px;
+            width:500px;
+            margin-top:-130px;
+            margin-bottom:50px;
+        }
+
+            .srch button {
+                position: relative;
+                left: 455px;
+                bottom: 34px;
+                font-size:13px;
+                padding-top:5px;
+                padding-bottom: 5px;
+            }
+
+        .im {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="srch">
+        <form asp-controller="Buy" asp-action="Search">
+            <input class="form-control border-1 rounded-pill" type="text" name="searchString" placeholder="Eg: Al-Ahly" required>
+            <button type="submit" class="btn btn-primary rounded-pill"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
+    <div class="container1">
+
+        <div class="row">
+            <div class="text-center pb-4 wow fadeInUp titlee" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Matches</h6>
+                <h1 class="mb-5">Explore matches</h1>
+
+            </div>
+          
+            @foreach (var match in Model)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="package-item position-relative">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" style="width: 100%; height: 270px;" src="~/img/@match.StadiumImage" alt="@match.StadiumName">
+                            <div class="team-names">
+                                <span class="team-left">@match.Team1</span>
+                                <span class="vs">vs</span>
+                                <span class="team-right">@match.Team2</span>
+                            </div>
+                        </div>
+                        <div class="d-flex border-bottom">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i> <a href="@match.GmapLocation" id="std" target="_blank">@match.StadiumName</a> </small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>@match.Date.ToShortDateString()</small>
+                        </div>
+                        <div class="text-center p-4">
+                            <h6 style="font-size:18px;" class="mb-2">From @match.LowestTicket EGP</h6>
+                            <div class="d-flex justify-content-center mb-2">
+                                <a asp-controller="Buy" asp-action="DisplayMatch" asp-route-id="@match.matchId" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;font-size:17px;">More Details</a>
+                                @if (match.TicketCount > 0 && match.Date > DateTime.Now)
+                                {
+                                    <a asp-controller="Buy" asp-action="BookMatch" asp-route-matchId="@match.matchId" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;">Buy Now</a>
+                                }
+                                else
+                                {
+                                    if (match.Date < DateTime.Now)
+                                    {
+                                        <a class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;background-color:dimgray">Out of date</a>
+                                    }
+                                    else if (match.TicketCount <= 0)
+                                    {
+                                        <a class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;font-size:15px;background-color:dimgray">Sold out</a>
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</body>
+</html>

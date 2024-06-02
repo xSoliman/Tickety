@@ -1,0 +1,146 @@
+﻿@model MatchDetails
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Match Details</title>
+    <style>
+
+        .container1 {
+            margin-top: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .match-card {
+            display: flex;
+            margin: 20px auto; /* Centering the match card */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .match-image {
+            flex: 1;
+            width: 250px; /* Set the width to 100% to fill the container */
+            height: 440px; /* Maintain aspect ratio */
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .match-details {
+            flex: 1;
+            padding: 30px;
+            color: #333;
+        }
+
+
+            .match-details p {
+                margin: 10px 0;
+                line-height: 1.6;
+                text-align: left;
+                font-size: 16px;
+            }
+
+            .match-details .description {
+                height: 100px; /* Set maximum height for description */
+                overflow-y: auto; /* Add vertical scrollbar if needed */
+                font-size: 18px;
+                color: dimgray;
+                position: relative;
+                bottom: 0px;
+                text-align: center;
+                border-bottom:1px solid gray;
+            }
+
+            .match-details a {
+                display: inline-block;
+                padding: 12px 24px;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+                position: relative;
+                top: 20px;
+                left: 250px;
+            }
+
+
+
+        .outside {
+            text-align: center; /* Centering the "outside" content */
+            margin-bottom: 10px; /* Adding some space between "outside" and match card */
+        }
+
+        .ref {
+            color: dimgray;
+            font-size: 18px;
+        }
+
+
+
+        .det {
+            position:relative;
+            top:10px;
+        }
+
+            /* Hover effect */
+            .det2:hover {
+                background-color: lightgray;
+            }
+
+        .buy-ticket {
+            display: inline-block;
+            padding: 12px 24px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            bottom: 20px;
+            right: 20px; /* Adjust positioning */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <div class="outside">
+            <h2>@Model.Team1 vs @Model.Team2</h2>
+            <p class="ref"><strong>Referee:</strong> @Model.Referee</p>
+        </div>
+        <div class="match-card">
+            <img src="~/img/@Model.StadiumImage" class="match-image" alt="Stadium Image">
+            <div class="match-details">
+
+                <p class="description">@Model.Description</p>
+                <div class="det">
+                    <p class="det2" style="font-size:20px;margin-bottom:5px;"><strong>Date:</strong> @Model.Date.ToShortDateString()</p>
+                    <p class="det2" style="font-size:20px;margin-bottom:5px;"><strong>Time:</strong> @Model.StartTimeFormatted</p>
+                    <p class="det2" style="font-size:20px;margin-bottom:5px;"><strong>Stadium:</strong> @Model.StadiumName</p>
+                    <p class="det2" style="font-size:20px;margin-bottom:5px;"><strong>Location:</strong> @Model.StadiumLocation</p>
+                    <p class="det2" style="font-size:20px;"><strong>Price:</strong> From @Model.LowestTicket</p>
+                </div>
+                @if (Model.TicketCount > 0 && Model.Date > DateTime.Now)
+                {
+                    <a asp-controller="Matches" asp-action="BookMatch" asp-route-matchId="@Model.matchId" class="btn btn-primary buy-ticket">Buy Ticket</a>
+                }
+                else
+                {
+                    if (Model.Date < DateTime.Now)
+                    {
+                        <a class="btn btn-primary buy-ticket" style="background-color:gray;border:none;">Out of date</a>
+                    }
+                    else if (Model.TicketCount <= 0)
+                    {
+                        <a class="btn btn-primary buy-ticket" style="background-color:gray;border:none;">Sold out</a>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
